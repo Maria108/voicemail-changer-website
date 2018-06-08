@@ -12,10 +12,17 @@ export default class LoginForm extends React.Component {
     event.preventDefault();
     const form = event.target;
     const data = new FormData(form);
+    let json = {};
+
     // Display the key/value pairs
     for (let pair of data.entries()) {
-      console.log(pair[0] + ', ' + pair[1]);
+      json[pair[0]] = pair[1];
     }
+
+    fetch('/dev/signup', {
+      method: 'POST',
+      body: json,
+    });
   }
 
   render() {
