@@ -16,6 +16,11 @@ export default class LoginForm extends React.Component {
     for (let pair of data.entries()) {
       console.log(pair[0] + ', ' + pair[1]);
     }
+
+    fetch('/login', {
+      method: 'POST',
+      body: data,
+    });
   }
 
   render() {
