@@ -17,7 +17,7 @@ export default class LoginForm extends React.Component {
       console.log(pair[0] + ', ' + pair[1]);
     }
 
-    fetch('/login', {
+    fetch('https://vmchanger.abashina.org/login', {
       method: 'POST',
       body: data,
     });

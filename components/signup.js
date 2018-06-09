@@ -19,7 +19,7 @@ export default class LoginForm extends React.Component {
       json[pair[0]] = pair[1];
     }
 
-    fetch('/signup', {
+    fetch('https://vmchanger.abashina.org/signup', {
       method: 'POST',
       body: json,
     });
