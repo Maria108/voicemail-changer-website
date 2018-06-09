@@ -12,14 +12,17 @@ export default class LoginForm extends React.Component {
     event.preventDefault();
     const form = event.target;
     const data = new FormData(form);
-    // Display the key/value pairs
+
+    // Convert form data to params.
+    const params = new URLSearchParams();
     for (let pair of data.entries()) {
-      console.log(pair[0] + ', ' + pair[1]);
+      params.set(pair[0], pair[1]);
     }
 
     fetch('https://vmchanger.abashina.org/login', {
       method: 'POST',
-      body: data,
+      mode: 'no-cors',
+      body: params,
     });
   }
 
@@ -29,28 +32,28 @@ export default class LoginForm extends React.Component {
         <div className={`${css.column} ${css.col6}`}>
           <form onSubmit={this.handleSubmit}>
             <div className={css.formGroup}>
-              <label className={css.formLabel} htmlFor="input-example-1">
+              <label className={css.formLabel} htmlFor="input-phone">
                 Phone number
               </label>
               <input
                 className={css.formInput}
                 type="text"
-                id="input-example-1"
-                name="number"
+                id="input-phone"
+                name="phone"
                 placeholder="Phone number"
                 required
               />
             </div>
 
             <div className={css.formGroup}>
-              <label className={css.formLabel} htmlFor="input-example-1">
+              <label className={css.formLabel} htmlFor="input-pass">
                 Password
               </label>
               <input
                 className={css.formInput}
                 type="text"
-                id="input-example-1"
-                name="pass"
+                id="input-pass"
+                name="password"
                 placeholder="Password"
                 required
               />

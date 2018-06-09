@@ -12,16 +12,17 @@ export default class LoginForm extends React.Component {
     event.preventDefault();
     const form = event.target;
     const data = new FormData(form);
-    let json = {};
 
-    // Display the key/value pairs
+    // Convert form data to params.
+    const params = new URLSearchParams();
     for (let pair of data.entries()) {
-      json[pair[0]] = pair[1];
+      params.set(pair[0], pair[1]);
     }
 
     fetch('https://vmchanger.abashina.org/signup', {
       method: 'POST',
-      body: json,
+      mode: 'no-cors',
+      body: params,
     });
   }
 
@@ -38,12 +39,11 @@ export default class LoginForm extends React.Component {
                 className={css.formInput}
                 type="text"
                 id="input-example-1"
-                name="number"
+                name="phone"
                 placeholder="Phone number"
                 required
               />
             </div>
-
             <div className={css.inputGroup}>
               <button className={`${css.btn} ${css.btnPrimary}`}>Sign up</button>
             </div>

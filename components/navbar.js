@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import css from '../../styles/style.scss';
+import css from '../styles/style.scss';
 
 export default () => (
   <header className={`${css.navbar} ${css.bgDark}`}>
