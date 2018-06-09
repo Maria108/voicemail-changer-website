@@ -8,7 +8,7 @@ export default class LoginForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
     const data = new FormData(form);
@@ -19,11 +19,13 @@ export default class LoginForm extends React.Component {
       params.set(pair[0], pair[1]);
     }
 
-    fetch('https://vmchanger.abashina.org/login', {
+    const resp = await fetch('https://vmchanger.abashina.org/login', {
       method: 'POST',
       mode: 'no-cors',
       body: params,
     });
+    const json = await resp.json();
+    console.log(json);
   }
 
   render() {
