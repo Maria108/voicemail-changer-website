@@ -32,13 +32,13 @@ export default class LoginForm extends React.Component {
         <div className={`${css.column} ${css.col6}`}>
           <form onSubmit={this.handleSubmit}>
             <div className={css.formGroup}>
-              <label className={css.formLabel} htmlFor="input-example-1">
+              <label className={css.formLabel} htmlFor="input-phone">
                 Phone number
               </label>
               <input
                 className={css.formInput}
                 type="text"
-                id="input-example-1"
+                id="input-phone"
                 name="phone"
                 placeholder="Phone number"
                 required

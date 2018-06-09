@@ -32,39 +32,39 @@ export default class VMChangerForm extends React.Component {
         <div className={css.Container}>
           <div className={`${css.column} ${css.col6}`}>
             <div className={css.formGroup}>
-              <label className={css.formLabel} htmlFor="input-example-1">
+              <label className={css.formLabel} htmlFor="input-name">
                 Name
               </label>
               <input
                 className={css.formInput}
                 type="text"
-                id="input-example-1"
+                id="input-name"
                 name="name"
                 placeholder="Name"
               />
             </div>
 
             <div className={css.formGroup}>
-              <label className={css.formLabel} htmlFor="input-example-1">
+              <label className={css.formLabel} htmlFor="input-phone">
                 Phone number
               </label>
               <input
                 className={css.formInput}
                 type="text"
-                id="input-example-1"
-                name="number"
+                id="input-phone"
+                name="phone"
                 placeholder="Tel"
               />
             </div>
 
             <div className={css.formGroup}>
-              <label className={css.formLabel} htmlFor="input-example-1">
+              <label className={css.formLabel} htmlFor="input-carrier">
                 Cell Phone Carrier
               </label>
-              <select className={css.formSelect} name="carrier">
+              <select className={css.formSelect} id="input-carrier" name="carrier">
                 <option>-</option>
-                <option value="at&t">AT&T</option>
-                <option value="t-mobile">T-Mobile</option>
+                <option value="att">AT&T</option>
+                <option value="tmobile">T-Mobile</option>
                 <option value="verizon">Verizon</option>
                 <option value="sprint">Sprint</option>
                 <option value="google">Google Fy</option>
@@ -74,25 +74,25 @@ export default class VMChangerForm extends React.Component {
             </div>
 
             <div className={css.formGroup}>
-              <label className={css.formLabel} htmlFor="input-example-1">
+              <label className={css.formLabel} htmlFor="input-pin">
                 Voicemail pin code
               </label>
               <input
                 className={css.formInput}
                 type="text"
-                id="input-example-1"
+                id="input-pin"
                 name="pin"
                 placeholder="Pin Code"
               />
             </div>
 
             <div className={css.formGroup}>
-              <label className={css.formLabel} htmlFor="input-example-3">
+              <label className={css.formLabel} htmlFor="input-text">
                 Text Message
               </label>
               <textarea
                 className={css.formInput}
-                id="input-example-3"
+                id="input-text"
                 name="text"
                 placeholder="Textarea"
                 rows="3"
