@@ -16,3 +16,9 @@ The dev mode is also support via `npm run dev`
 npm run build
 npm run export
 ```
+
+### Deploy website to Github Pages
+
+```bash
+npm run deploy
+```
