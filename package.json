@@ -3,7 +3,8 @@
     "dev": "node server.js",
     "build": "next build",
     "export": "next export",
-    "start": "NODE_ENV=production node server.js"
+    "start": "NODE_ENV=production node server.js",
+    "deploy": "next build && next export && touch out/.nojekyll && touch out/CNAME && echo \"vmc.abashina.org\" >> out/CNAME && push-dir --dir=out --branch=gh-pages"
   },
   "dependencies": {
     "@zeit/next-sass": "0.2.0",
@@ -17,5 +18,8 @@
     "react-dom": "^16.4.0",
     "socket.io-client": "^2.1.1",
     "spectre.css": "^0.5.1"
+  },
+  "devDependencies": {
+    "push-dir": "^0.4.1"
   }
 }
