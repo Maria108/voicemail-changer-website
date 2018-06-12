@@ -69,6 +69,7 @@ export default class VMChangerForm extends React.Component {
                   id="input-phone"
                   name="phone"
                   placeholder="Tel"
+                  required
                 />
               </div>
 
@@ -82,6 +83,7 @@ export default class VMChangerForm extends React.Component {
                   id="input-pin"
                   name="password"
                   placeholder="Password"
+                  required
                 />
               </div>
 
@@ -89,15 +91,13 @@ export default class VMChangerForm extends React.Component {
                 <label className={css.formLabel} htmlFor="input-carrier">
                   Cell Phone Carrier
                 </label>
-                <select className={css.formSelect} id="input-carrier" name="carrier">
+                <select className={css.formSelect} id="input-carrier" name="carrier" required>
                   <option>-</option>
                   <option value="att">AT&T</option>
                   <option value="tmobile">T-Mobile</option>
                   <option value="verizon">Verizon</option>
                   <option value="sprint">Sprint</option>
-                  <option value="google">Google Fy</option>
                   <option value="mint">Mint</option>
-                  <option value="metro">MetroPCS</option>
                 </select>
               </div>
 
@@ -111,6 +111,7 @@ export default class VMChangerForm extends React.Component {
                   id="input-pin"
                   name="pin"
                   placeholder="Pin Code"
+                  required
                 />
               </div>
 
@@ -124,6 +125,7 @@ export default class VMChangerForm extends React.Component {
                   name="text"
                   placeholder="Textarea"
                   rows="3"
+                  required
                 />
               </div>
               <div className={css.inputGroup}>
