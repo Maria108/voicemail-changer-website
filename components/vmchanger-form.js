@@ -30,7 +30,7 @@ export default class VMChangerForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <div className={css.Container}>
-          <div className={`${css.column} ${css.col6}`}>
+          <div className={`${css.column} ${css.col8} ${css.colMxAuto}`}>
             <div className={css.formGroup}>
               <label className={css.formLabel} htmlFor="input-name">
                 Name

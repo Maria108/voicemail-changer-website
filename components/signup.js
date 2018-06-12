@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Router from 'next/router'
 
 import css from '../styles/style.scss';
 
@@ -24,17 +25,17 @@ export default class LoginForm extends React.Component {
       mode: 'no-cors',
       body: params,
     });
+
+    // Redirect user to vm changer form.
+    Router.push('/account');
   }
 
   render() {
     return (
       <div className={css.Container}>
-        <div className={`${css.column} ${css.col6}`}>
+        <div className={`${css.column} ${css.col2} ${css.colMxAuto}`}>
           <form onSubmit={this.handleSubmit}>
             <div className={css.formGroup}>
-              <label className={css.formLabel} htmlFor="input-phone">
-                Phone number
-              </label>
               <input
                 className={css.formInput}
                 type="text"
@@ -44,7 +45,7 @@ export default class LoginForm extends React.Component {
                 required
               />
             </div>
-            <div className={css.inputGroup}>
+            <div className={`${css.inputGroup} ${css.vmSignupBtn}`}>
               <button className={`${css.btn} ${css.btnPrimary}`}>Sign up</button>
             </div>
           </form>
