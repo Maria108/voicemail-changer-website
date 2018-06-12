@@ -56,6 +56,7 @@ export default class VMChangerForm extends React.Component {
                   id="input-name"
                   name="name"
                   placeholder="Name"
+                  required
                 />
               </div>
 
