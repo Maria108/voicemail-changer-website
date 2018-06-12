@@ -125,7 +125,7 @@ export default class VMChangerForm extends React.Component {
                   id="input-text"
                   name="text"
                   rows="3"
-                  defaultValue="Hello. You have reached . Unfortunately, I cannot take your call right now, but I would like to return it as soon as I can. So please leave me a message after the beep."
+                  defaultValue="Hi. This is . I can't answer the phone right now, but if you leave me a message with your name and phone number, I will return your call as soon as possible."
                   required
                 />
               </div>
