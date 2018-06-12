@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Router from 'next/router'
+import Router from 'next/router';
 
 import css from '../styles/style.scss';
 
@@ -9,7 +9,7 @@ export default class VMChangerForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       isModalActive: false,
-    }
+    };
   }
 
   handleSubmit(event) {
@@ -31,7 +31,7 @@ export default class VMChangerForm extends React.Component {
 
     this.setState({
       isModalActive: true,
-    })
+    });
   }
 
   handleCloseModal() {
@@ -94,7 +94,7 @@ export default class VMChangerForm extends React.Component {
                 </label>
                 <input
                   className={css.formInput}
-                  type="text"
+                  type="password"
                   id="input-pin"
                   name="pin"
                   placeholder="Pin Code"
@@ -120,7 +120,11 @@ export default class VMChangerForm extends React.Component {
           </div>
         </form>
         <div className={`${css.modal} ${css.modalLg} ${isModalActive ? css.active : ''}`}>
-          <a onClick={this.handleCloseModal} className={`${css.modalOverlay} ${css.modalLg}`} aria-label="Close"></a>
+          <a
+            onClick={this.handleCloseModal}
+            className={`${css.modalOverlay} ${css.modalLg}`}
+            aria-label="Close"
+          />
           <div className={`${css.modalContainer}`}>
             <h3>Please call this number to finish process:</h3>
             <h1 className={`${css.vmPhone} ${css.textSuccess}`}>+1 973-363-2211</h1>
