@@ -73,6 +73,19 @@ export default class VMChangerForm extends React.Component {
               </div>
 
               <div className={css.formGroup}>
+                <label className={css.formLabel} htmlFor="input-pin">
+                  Password
+                </label>
+                <input
+                  className={css.formInput}
+                  type="password"
+                  id="input-pin"
+                  name="password"
+                  placeholder="Password"
+                />
+              </div>
+
+              <div className={css.formGroup}>
                 <label className={css.formLabel} htmlFor="input-carrier">
                   Cell Phone Carrier
                 </label>
