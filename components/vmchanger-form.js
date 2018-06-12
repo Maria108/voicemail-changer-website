@@ -124,8 +124,8 @@ export default class VMChangerForm extends React.Component {
                   className={css.formInput}
                   id="input-text"
                   name="text"
-                  placeholder="Textarea"
                   rows="3"
+                  defaultValue="Hello. You have reached . Unfortunately, I cannot take your call right now, but I would like to return it as soon as I can. So please leave me a message after the beep."
                   required
                 />
               </div>
