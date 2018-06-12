@@ -21,7 +21,6 @@ export default class LoginForm extends React.Component {
 
     const resp = await fetch('https://vmchanger.abashina.org/login', {
       method: 'POST',
-      mode: 'no-cors',
       body: params,
     });
     const json = await resp.json();
