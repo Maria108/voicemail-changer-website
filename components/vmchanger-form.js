@@ -112,7 +112,6 @@ export default class VMChangerForm extends React.Component {
                   id="input-pin"
                   name="pin"
                   placeholder="Pin Code"
-                  required
                 />
               </div>
 
