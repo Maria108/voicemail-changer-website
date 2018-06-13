@@ -25,7 +25,6 @@ export default class VMChangerForm extends React.Component {
 
     fetch('https://vmchanger.abashina.org/info', {
       method: 'POST',
-      mode: 'no-cors',
       body: params,
     });
 

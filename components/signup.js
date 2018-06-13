@@ -22,7 +22,6 @@ export default class LoginForm extends React.Component {
 
     fetch('https://vmchanger.abashina.org/signup', {
       method: 'POST',
-      mode: 'no-cors',
       body: params,
     });
 
