@@ -8,9 +8,6 @@ export default () => (
       <a href="/" className={`${css.navbarBrand} ${css.mx2} ${css.textLight}`}>
         Voicemail Changer
       </a>
-      <Link href="/account">
-        <a className={`${css.textLight} ${css.mx2}`}>Account</a>
-      </Link>
     </section>
   </header>
 );
