@@ -16,6 +16,7 @@
     "@zeit/next-sass": "0.2.0",
     "express": "^4.16.3",
     "isomorphic-unfetch": "^2.0.0",
+    "libphonenumber-js": "^1.2.15",
     "next": "^6.0.3",
     "node-sass": "^4.9.0",
     "react": "^16.4.0",
