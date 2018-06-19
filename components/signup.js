@@ -10,7 +10,7 @@ export default class LoginForm extends React.Component {
 
     // Set initial state values.
     this.state = {
-      isDisabled: true
+      isDisabled: true,
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,24 +41,20 @@ export default class LoginForm extends React.Component {
   handleInputChange(event) {
     const { value } = event.target;
 
+    // Format number and update input.
+    const formatedNum = new AsYouType('US').input(value);
+    event.target.value = formatedNum
+
     // Check if it's a valid US number.
     const isValid = isValidNumber(value, 'US')
     this.setState({
-      isDisabled: !isValid
+      isDisabled: !isValid,
     })
-
-    // Format number and update input.
-    const formatedNum = new AsYouType('US').input(value)
-    event.target.value = formatedNum
-
-    console.log(value, isValid)
   }
 
   handleInputClick(event) {
-    this.setState({
-      loveCount: this.state.loveCount + 2,
-    })
-
+    // Clear input when user clicks on it.
+    event.target.value = '';
   }
 
   render() {
@@ -73,6 +69,7 @@ export default class LoginForm extends React.Component {
                 <span className={`${css.inputGroupAddon} ${css.countryCode}`}>+1</span>
                 <input
                   onChange={this.handleInputChange}
+                  onClick={this.handleInputClick}
                   className={css.formInput}
                   type="text"
                   id="input-phone"
