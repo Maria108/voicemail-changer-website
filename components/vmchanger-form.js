@@ -8,13 +8,16 @@ export default class VMChangerForm extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleInputChangeNum = this.handleInputChangeNum.bind(this);
-    this.handleInputChangeName = this.handleInputChangeName.bind(this);
+    this.handleChangeNumber = this.handleChangeNumber.bind(this);
+    this.handleChangeName = this.handleChangeName.bind(this);
+    this.handleChangeText = this.handleChangeText.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.generateText = this.generateText.bind(this);
 
     this.state = {
       isModalActive: false,
       name: '',
+      text: this.generateText(''),
     };
   }
 
@@ -44,7 +47,7 @@ export default class VMChangerForm extends React.Component {
     Router.push('/');
   }
 
-  handleInputChangeNum(event) {
+  handleChangeNumber(event) {
     const { value } = event.target;
 
     // Format number and update input.
@@ -55,15 +58,27 @@ export default class VMChangerForm extends React.Component {
     isValidNumber(value, 'US');
   }
 
-  handleInputChangeName(event) {
+  handleChangeName(event) {
     const { value } = event.target;
     this.setState({
       name: value,
+      text: this.generateText(value),
     });
   }
 
+  handleChangeText(event) {
+    const { value } = event.target;
+    this.setState({
+      text: value,
+    });
+  }
+
+  generateText(name) {
+    return `Hello! You've reached ${name}'s voicemail. Please leave a message with your name and number after a tone. Thanks!`;
+  }
+
   render() {
-    const { isModalActive, name } = this.state;
+    const { isModalActive, name, text } = this.state;
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -74,7 +89,7 @@ export default class VMChangerForm extends React.Component {
                   Name
                 </label>
                 <input
-                  onChange={this.handleInputChangeName}
+                  onChange={this.handleChangeName}
                   className={css.formInput}
                   type="text"
                   id="input-name"
@@ -91,7 +106,7 @@ export default class VMChangerForm extends React.Component {
                 <div className={css.inputGroup}>
                   <span className={`${css.inputGroupAddon} ${css.countryCode}`}>+1</span>
                   <input
-                    onChange={this.handleInputChangeNum}
+                    onChange={this.handleChangeNumber}
                     className={css.formInput}
                     type="text"
                     id="input-phone"
@@ -104,13 +119,13 @@ export default class VMChangerForm extends React.Component {
               </div>
 
               <div className={css.formGroup}>
-                <label className={css.formLabel} htmlFor="input-pin">
+                <label className={css.formLabel} htmlFor="input-password">
                   Password
                 </label>
                 <input
                   className={css.formInput}
                   type="password"
-                  id="input-pin"
+                  id="input-password"
                   name="password"
                   placeholder="Password"
                   required
@@ -151,11 +166,12 @@ export default class VMChangerForm extends React.Component {
                   Text Message
                 </label>
                 <textarea
+                  onChange={this.handleChangeText}
                   className={css.formInput}
                   id="input-text"
                   name="text"
                   rows="3"
-                  value={`Hello! You've reached ${name}'s voicemail. Please leave a message with your name and number after a tone. Thanks!`}
+                  value={text}
                   required
                 />
               </div>
