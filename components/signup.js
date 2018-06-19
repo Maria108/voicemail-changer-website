@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Router from 'next/router'
-import { AsYouType, isValidNumber } from 'libphonenumber-js'
+import Router from 'next/router';
+import { AsYouType, isValidNumber } from 'libphonenumber-js';
 
 import css from '../styles/style.scss';
 
@@ -11,7 +11,7 @@ export default class LoginForm extends React.Component {
     // Set initial state values.
     this.state = {
       isDisabled: true,
-    }
+    };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -43,13 +43,13 @@ export default class LoginForm extends React.Component {
 
     // Format number and update input.
     const formatedNum = new AsYouType('US').input(value);
-    event.target.value = formatedNum
+    event.target.value = formatedNum;
 
     // Check if it's a valid US number.
-    const isValid = isValidNumber(value, 'US')
+    const isValid = isValidNumber(value, 'US');
     this.setState({
       isDisabled: !isValid,
-    })
+    });
   }
 
   handleInputClick(event) {
@@ -58,8 +58,8 @@ export default class LoginForm extends React.Component {
   }
 
   render() {
-    const {name} = this.props;
-    const {temp, loveCount, isDisabled} = this.state;
+    const { name } = this.props;
+    const { isDisabled } = this.state;
     return (
       <div className={css.Container}>
         <div className={`${css.column} ${css.col2} ${css.colMxAuto}`}>
@@ -81,7 +81,9 @@ export default class LoginForm extends React.Component {
               </div>
             </div>
             <div className={`${css.inputGroup} ${css.vmSignupBtn}`}>
-              <button className={`${css.btn} ${css.btnPrimary}`} disabled={isDisabled}>Sign up</button>
+              <button className={`${css.btn} ${css.btnPrimary}`} disabled={isDisabled}>
+                Sign up
+              </button>
             </div>
           </form>
         </div>
