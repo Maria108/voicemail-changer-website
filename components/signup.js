@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Router from 'next/router';
-import { AsYouType, isValidNumber } from 'libphonenumber-js';
+import { AsYouType, formatNumber, isValidNumber, parseNumber } from 'libphonenumber-js';
 
 import css from '../styles/style.scss';
 
@@ -11,6 +11,9 @@ export default class LoginForm extends React.Component {
     // Set initial state values.
     this.state = {
       isDisabled: true,
+      form: {
+        phone: '',
+      },
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,12 +23,11 @@ export default class LoginForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const form = event.target;
-    const data = new FormData(form);
+    const { form } = this.state;
 
     // Convert form data to params.
     const params = new URLSearchParams();
-    for (let pair of data.entries()) {
+    for (let pair of Object.entries(form)) {
       params.set(pair[0], pair[1]);
     }
 
@@ -38,17 +40,22 @@ export default class LoginForm extends React.Component {
     Router.push('/account');
   }
 
-  handleInputChange(event) {
+  handleInputChange(name, event) {
     const { value } = event.target;
 
+    // Parse input number.
+    const cleanNum = value.replace(/[^\d]/g, '');
     // Format number and update input.
-    const formatedNum = new AsYouType('US').input(value);
+    const formatedNum = new AsYouType('US').input(cleanNum);
     event.target.value = formatedNum;
 
     // Check if it's a valid US number.
     const isValid = isValidNumber(value, 'US');
     this.setState({
       isDisabled: !isValid,
+      form: {
+        phone: formatNumber(cleanNum, 'US', 'E.164'),
+      },
     });
   }
 
@@ -68,8 +75,8 @@ export default class LoginForm extends React.Component {
               <div className={css.inputGroup}>
                 <span className={`${css.inputGroupAddon} ${css.countryCode}`}>+1</span>
                 <input
-                  onChange={this.handleInputChange}
                   onClick={this.handleInputClick}
+                  onChange={event => this.handleInputChange('phone', event)}
                   className={css.formInput}
                   type="text"
                   id="input-phone"

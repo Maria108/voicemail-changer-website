@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Router from 'next/router';
-import { AsYouType, isValidNumber } from 'libphonenumber-js';
+import { AsYouType, formatNumber, isValidNumber, parseNumber } from 'libphonenumber-js';
 
 import css from '../styles/style.scss';
 
@@ -8,27 +8,32 @@ export default class VMChangerForm extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleChangeNumber = this.handleChangeNumber.bind(this);
+    this.handleChangePhone = this.handleChangePhone.bind(this);
     this.handleChangeName = this.handleChangeName.bind(this);
-    this.handleChangeText = this.handleChangeText.bind(this);
+    this.handleChangeInput = this.handleChangeInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.generateText = this.generateText.bind(this);
 
     this.state = {
       isModalActive: false,
-      name: '',
-      text: this.generateText(''),
+      form: {
+        name: '',
+        phone: '',
+        password: '',
+        carrier: '',
+        pin: '',
+        text: this.generateText(''),
+      },
     };
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    const form = event.target;
-    const data = new FormData(form);
+    const { form } = this.state;
 
     // Convert form data to params.
     const params = new URLSearchParams();
-    for (let pair of data.entries()) {
+    for (let pair of Object.entries(form)) {
       params.set(pair[0], pair[1]);
     }
 
@@ -47,30 +52,37 @@ export default class VMChangerForm extends React.Component {
     Router.push('/');
   }
 
-  handleChangeNumber(event) {
+  handleChangePhone(event) {
     const { value } = event.target;
 
+    // Parse input number.
+    const cleanNum = value.replace(/[^\d]/g, '');
     // Format number and update input.
-    const formatedNum = new AsYouType('US').input(value);
+    const formatedNum = new AsYouType('US').input(cleanNum);
     event.target.value = formatedNum;
 
-    // Check if it's a valid US number.
-    isValidNumber(value, 'US');
+    this.setState({
+      form: {
+        phone: formatNumber(cleanNum, 'US', 'E.164'),
+      },
+    });
   }
 
   handleChangeName(event) {
     const { value } = event.target;
     this.setState({
-      name: value,
-      text: this.generateText(value),
+      form: {
+        name: value,
+        text: this.generateText(value),
+      },
     });
   }
 
-  handleChangeText(event) {
+  handleChangeInput(name, event) {
     const { value } = event.target;
-    this.setState({
-      text: value,
-    });
+    const { form } = this.state;
+    form[name] = value;
+    this.setState(form);
   }
 
   generateText(name) {
@@ -78,7 +90,11 @@ export default class VMChangerForm extends React.Component {
   }
 
   render() {
-    const { isModalActive, name, text } = this.state;
+    const {
+      isModalActive,
+      name,
+      form: { text },
+    } = this.state;
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -106,7 +122,7 @@ export default class VMChangerForm extends React.Component {
                 <div className={css.inputGroup}>
                   <span className={`${css.inputGroupAddon} ${css.countryCode}`}>+1</span>
                   <input
-                    onChange={this.handleChangeNumber}
+                    onChange={this.handleChangePhone}
                     className={css.formInput}
                     type="text"
                     id="input-phone"
@@ -123,6 +139,7 @@ export default class VMChangerForm extends React.Component {
                   Password
                 </label>
                 <input
+                  onChange={event => this.handleChangeInput('password', event)}
                   className={css.formInput}
                   type="password"
                   id="input-password"
@@ -136,7 +153,13 @@ export default class VMChangerForm extends React.Component {
                 <label className={css.formLabel} htmlFor="input-carrier">
                   Cell Phone Carrier
                 </label>
-                <select className={css.formSelect} id="input-carrier" name="carrier" required>
+                <select
+                  className={css.formSelect}
+                  id="input-carrier"
+                  name="carrier"
+                  onChange={event => this.handleChangeInput('carrier', event)}
+                  required
+                >
                   <option>-</option>
                   <option value="att">AT&T</option>
                   <option value="googlefi">Google Fi</option>
@@ -152,6 +175,7 @@ export default class VMChangerForm extends React.Component {
                   Voicemail pin code
                 </label>
                 <input
+                  onChange={event => this.handleChangeInput('pin', event)}
                   className={css.formInput}
                   type="password"
                   id="input-pin"
@@ -166,7 +190,7 @@ export default class VMChangerForm extends React.Component {
                   Text Message
                 </label>
                 <textarea
-                  onChange={this.handleChangeText}
+                  onChange={event => this.handleChangeInput('text', event)}
                   className={css.formInput}
                   id="input-text"
                   name="text"
