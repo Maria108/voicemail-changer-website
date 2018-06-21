@@ -54,6 +54,7 @@ export default class VMChangerForm extends React.Component {
 
   handleChangePhone(event) {
     const { value } = event.target;
+    const { form } = this.state;
 
     // Parse input number.
     const cleanNum = value.replace(/[^\d]/g, '');
@@ -61,21 +62,16 @@ export default class VMChangerForm extends React.Component {
     const formatedNum = new AsYouType('US').input(cleanNum);
     event.target.value = formatedNum;
 
-    this.setState({
-      form: {
-        phone: formatNumber(cleanNum, 'US', 'E.164'),
-      },
-    });
+    form.phone = formatNumber(cleanNum, 'US', 'E.164');
+    this.setState(form);
   }
 
   handleChangeName(event) {
     const { value } = event.target;
-    this.setState({
-      form: {
-        name: value,
-        text: this.generateText(value),
-      },
-    });
+    const { form } = this.state;
+    form.name = value;
+    form.text = this.generateText(value);
+    this.setState(form);
   }
 
   handleChangeInput(name, event) {
